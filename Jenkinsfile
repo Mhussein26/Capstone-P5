@@ -12,7 +12,7 @@ pipeline {
 			steps {
 				withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'DockerImage', usernameVariable: 'USER', passwordVariable: 'PASS']]){
 					sh '''
-						docker build -t Mhussein26/Capstone-P5 .
+						docker build -t Mhussein26/capstone-p5 .
 					'''
 				}
 			}
@@ -23,7 +23,7 @@ pipeline {
 				withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'DockerImage', usernameVariable: 'USER', passwordVariable: 'PASS']]){
 					sh '''
 						docker login -u $USER -p $PASS
-						docker push Mhussein26/Capstone-P5
+						docker push Mhussein26/capstone-p5
 					'''
 				}
 			}
@@ -33,7 +33,7 @@ pipeline {
 			steps {
 				withAWS(region:'us-west-2', credentials:'aws-eks') {
 					sh '''
-						kubectl config use-context arn:aws:eks:us-west-2:276214588879:cluster/Capstone-P5cluster
+						kubectl config use-context arn:aws:eks:us-west-2:276214588879:cluster/capstone-p5cluster
 					'''
 				}
 			}
